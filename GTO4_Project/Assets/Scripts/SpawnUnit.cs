@@ -6,7 +6,7 @@ public class SpawnUnit : MonoBehaviour {
 
     // Use this for initialization
     public Grid myGrid;
-    public GameObject myUnit;
+    public Unit myUnit;
 
     public void spawnUnit()
     {
@@ -15,7 +15,7 @@ public class SpawnUnit : MonoBehaviour {
         
         if (fetchedTile.emptyTile)
         {
-            GameObject newUnit = Instantiate(myUnit, tilePosition, Quaternion.Euler(Vector3.right));
+            Unit newUnit = Instantiate(myUnit, tilePosition, Quaternion.Euler(Vector3.right));
         }
     }
 
