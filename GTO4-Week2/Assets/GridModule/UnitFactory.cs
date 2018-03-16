@@ -34,8 +34,17 @@ public class UnitFactory : MonoBehaviour
 
             Unit newUnit = Instantiate(Prototype);
             Cell cell = Map.GetCell(SpawnCoordinate.x, SpawnCoordinate.y);
-        
+
+            PlayerOwned ownertag = newUnit.GetComponent<PlayerOwned>();
+            if (ownertag == null)
+            {
+                Debug.LogError("Unit needs to have a player owned component");
+            }
+            Player owner = GetComponentInParent<Player>();
+            ownertag.setOwner(owner);
             newUnit.transform.SetParent(cell.transform, false);
+            
+            
         }
         else
         {

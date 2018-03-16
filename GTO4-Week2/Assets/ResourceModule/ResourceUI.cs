@@ -41,6 +41,13 @@ public class ResourceUI : MonoBehaviour
         }
         valueTicker = StartCoroutine(TickVisualValue(resource.GetQuantity()));
     }
+
+    public void OnDisable()
+    {
+        resource = GetComponent<Resource>();
+        Label.text = resource.name;
+        Value.text = resource.GetQuantity().ToString();
+    }
     
     IEnumerator TickVisualValue(int target)
     {        

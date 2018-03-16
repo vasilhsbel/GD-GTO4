@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour 
 {
+    public PlayerOwned owner;
 
+    public void Start()
+    {
+        owner.setOwner(GetComponent<Player>());
+    }
 }
