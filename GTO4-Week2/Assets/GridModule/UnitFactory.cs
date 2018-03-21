@@ -10,9 +10,9 @@ public class UnitFactory : MonoBehaviour
     public List<ResourceCost> Costs;
     
     // Temporary until we figure out a better way to decide where to spawn.
-    public Vector2Int SpawnCoordinate;
+    //public Vector2Int SpawnCoordinate;
 
-    public void SpawnUnit()
+    public void SpawnUnit(Cell cell)
     {
 
         bool canAfford = true;
@@ -33,7 +33,7 @@ public class UnitFactory : MonoBehaviour
             }
 
             Unit newUnit = Instantiate(Prototype);
-            Cell cell = Map.GetCell(SpawnCoordinate.x, SpawnCoordinate.y);
+            //cell = Map.GetCell(SpawnCoordinate.x, SpawnCoordinate.y);
 
             PlayerOwned ownertag = newUnit.GetComponent<PlayerOwned>();
             if (ownertag == null)
