@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cell : MonoBehaviour
-{
+public class Tile : MonoBehaviour {
+
     public int X;
     public int Y;
 
@@ -11,7 +11,7 @@ public class Cell : MonoBehaviour
 
     public void OnTriggerStay()
     {
-        this.isEmpty = false;   
+        this.isEmpty = false;
     }
 
     public void OnTriggerExit()
