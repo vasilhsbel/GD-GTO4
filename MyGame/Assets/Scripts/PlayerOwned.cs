@@ -16,4 +16,9 @@ public class PlayerOwned : MonoBehaviour
             playerColorRenderer.material.color = owner.color;
         }
     }
+
+    public Player getOwner()
+    {
+        return owner;
+    }
 }

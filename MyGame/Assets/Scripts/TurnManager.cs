@@ -5,6 +5,7 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     public List<Player> myPlayers;
+    public MouseManager mm;
 
     [SerializeField]private int currentPlayer = 0;
 
@@ -24,6 +25,7 @@ public class TurnManager : MonoBehaviour
         if(currentPlayer>=myPlayers.Count)
         currentPlayer=0;
         myPlayers[currentPlayer].startTurn();
+        mm.updatePlayer();
     }
 
     public Player getPlayer()

@@ -6,8 +6,16 @@ public class Tile : MonoBehaviour {
 
     public int X;
     public int Y;
+    public int Z;
 
     public bool isEmpty;
+
+    public void setCoordinates(int y, int x)
+    {
+        X = x;
+        Y = y;
+        Z = -(x + y);
+    }
 
     public void OnTriggerStay()
     {

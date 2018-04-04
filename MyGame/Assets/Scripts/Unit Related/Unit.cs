@@ -16,9 +16,9 @@ public class Unit : MonoBehaviour
 
     public void Start()
     {
-        owner.setOwner(GetComponent<Player>());
-        unitSpeedX = myGrid.getXspeed(); 
-        unitSpeedZ = myGrid.getZspeed(); 
+        //owner.setOwner(GetComponent<Player>());
+        //unitSpeedX = myGrid.getXspeed(); 
+        //unitSpeedZ = myGrid.getZspeed(); 
     }
 
     public void newTurn()

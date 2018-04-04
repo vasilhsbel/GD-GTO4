@@ -9,17 +9,66 @@ public class Grid : MonoBehaviour {
     public int gridWidth = 11; // These 2 must be uneven so that there is always a hex in the middle.
     public int gridHeight = 11;
 
+    
+
     float hexWidth = 1.732f; //Width and Height can be seen in Blender.
     float hexHeight = 2.0f;
     public float gap = 0.0f; //Optional gap setting between hexagons.
 
     Vector3 startPos;
+   
 
     private void Start()
     {
         addGap();
         CalcStartPos();
         CreateGrid();
+        GeneratePathfindingGraph();
+    }
+
+    class Node
+    {
+        public List<Node> neighbours;
+
+        public Node()
+        {
+            neighbours = new List<Node>();
+        }
+
+        
+    }
+
+    Node[,] graph;
+
+    void GeneratePathfindingGraph()
+    {
+        graph = new Node[gridWidth, gridHeight];
+
+        for (int y = 0; y < gridHeight; y++)
+        {
+            for (int x = 0; x < gridWidth; x++)
+            {
+                
+                if (y == gridHeight-1)
+                {
+                    graph[x,y].neighbours.Add(graph[x, y + 1]);
+                }
+                if (y == 0)
+                {
+                    graph[x, y].neighbours.Add(graph[x,y - 1]);
+                }
+                if (x == 0)
+                {
+                    graph[x,y].neighbours.Add(graph[x - 1, y]);
+                    graph[x,y].neighbours.Add(graph[x - 1, y + 1]);
+                }
+                if (x == gridWidth-1)
+                {
+                    graph[x,y].neighbours.Add(graph[x + 1, y]);
+                    graph[x,y].neighbours.Add(graph[x + 1, y - 1]);
+                }
+            }
+        }
     }
 
     public float getXspeed()
@@ -77,6 +126,7 @@ public class Grid : MonoBehaviour {
                 hex.position = CalcWorldPos(gridPos);
                 hex.parent = this.transform;
                 hex.name = "Hexagon" + x + "|" + y;
+                hex.GetComponentInChildren<Tile>().setCoordinates(x, y);
             }
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Teleport : MonoBehaviour {
+public class UnitMove : MonoBehaviour {
 
     public MouseManager mm;
     public Tile hitTile;
@@ -28,19 +28,31 @@ public class Teleport : MonoBehaviour {
             RaycastHit hitInfo;
 
             if (Physics.Raycast(ray, out hitInfo))
-            {                
-                hitTile = hitInfo.collider.GetComponentInParent<Tile>();                
+            {
+                hitTile = hitInfo.collider.GetComponentInParent<Tile>();
             }
             if (hitTile != null)
             {
                 if (Input.GetMouseButtonDown(1))
-                {                    
-                        mm.selectedTile.GetComponentInParent<Unit>().transform.parent = hitTile.transform;
-                        mm.selectedTile.GetComponentInParent<Unit>().transform.position = hitTile.transform.position;
-                    //mm.selectedObject.transform.parent = hitTile.transform;
-                    //mm.selectedObject.transform.position = hitTile.transform.position;
+                {
+                    //MoveUnitTo();
+                    if (selectedTile != null)
+                    {
+                        selectedUnit.transform.parent = hitTile.transform;
+                        selectedUnit.transform.position = hitTile.transform.position;
+
+                    }
+                    mm.selectedTile = hitTile;
+
                 }
             }
         }
-	}
+    }
+
+    public void MoveUnitTo()
+    {
+        selectedUnit = mm.selectedTile.GetComponentInParent<Unit>();
+        selectedUnit.transform.parent = hitTile.transform;
+        selectedUnit.transform.position = hitTile.transform.position;
+    }
 }

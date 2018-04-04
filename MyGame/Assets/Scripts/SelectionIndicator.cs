@@ -17,16 +17,16 @@ public class SelectionIndicator : MonoBehaviour {
     {
         if (trackHover)
         {
-            if (mm.hoveredObject != null)
+            if (mm.hoveredTile != null)
             {
-                this.transform.position = mm.hoveredObject.transform.position;
+                this.transform.position = mm.hoveredTile.transform.position;
             }
         }
         else
         {
-            if (mm.selectedObject != null)
+            if (mm.selectedTile != null)
             {
-                this.transform.position = mm.selectedObject.transform.position;
+                this.transform.position = mm.selectedTile.transform.position;
             }
         }
     }

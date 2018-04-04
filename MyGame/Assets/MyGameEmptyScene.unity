@@ -763,6 +763,7 @@ MonoBehaviour:
   myPlayers:
   - {fileID: 1175890867}
   - {fileID: 340764196}
+  mm: {fileID: 1940472559}
   currentPlayer: 0
 --- !u!4 &341926242
 Transform:
@@ -1517,6 +1518,7 @@ GameObject:
   m_Component:
   - component: {fileID: 619547747}
   - component: {fileID: 619547746}
+  - component: {fileID: 619547748}
   m_Layer: 0
   m_Name: Teloporter
   m_TagString: Untagged
@@ -1530,13 +1532,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 619547745}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc732155aabce764092b285d6570f4e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mm: {fileID: 1940472559}
   hitTile: {fileID: 0}
+  selectedUnit: {fileID: 0}
+  selectedTile: {fileID: 0}
 --- !u!4 &619547747
 Transform:
   m_ObjectHideFlags: 0
@@ -1550,6 +1554,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &619547748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 619547745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd9a5392fcf02c54a8e508de908cced5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mm: {fileID: 1940472559}
+  hitTile: {fileID: 0}
+  selectedUnit: {fileID: 0}
+  selectedTile: {fileID: 0}
 --- !u!1 &659975157
 GameObject:
   m_ObjectHideFlags: 0
@@ -3209,8 +3228,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hexPrefab: {fileID: 4591277058282522, guid: abd8fa695d9b0554aa032f5d065b981f, type: 2}
-  gridWidth: 5
-  gridHeight: 5
+  gridWidth: 11
+  gridHeight: 11
   gap: 0.18
 --- !u!4 &1898385987
 Transform:
@@ -3252,12 +3271,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede199ff145154a489736db022c593a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoveredObject: {fileID: 0}
-  selectedObject: {fileID: 0}
+  hoveredTile: {fileID: 0}
   selectedTile: {fileID: 0}
   mySelectedIndicator: {fileID: 659975159}
   myHoveredIndicator: {fileID: 430373180}
   currentPlayer: {fileID: 0}
+  myManager: {fileID: 341926241}
+  UnitCheck: {fileID: 0}
+  checkPlayer: {fileID: 0}
 --- !u!4 &1940472560
 Transform:
   m_ObjectHideFlags: 0

@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class MouseManager : MonoBehaviour {
 
-    public Unit hoveredObject;
-    public Unit selectedObject;
+    public Tile hoveredTile;
+    //public Unit selectedObject;
     public Tile selectedTile;
     public SelectionIndicator mySelectedIndicator;
     public SelectionIndicator myHoveredIndicator;
     public Player currentPlayer;
+    public TurnManager myManager;
+    public Unit UnitCheck;
+    public Player checkPlayer;
+    PlayerOwned temp;
 
 
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start ()
+    {
+        updatePlayer();
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -25,36 +31,57 @@ public class MouseManager : MonoBehaviour {
 
         if (Physics.Raycast(ray, out hitInfo))
         {
-            Unit hitObject = hitInfo.collider.GetComponentInParent<Unit>();
             Tile hitTile = hitInfo.collider.GetComponentInParent<Tile>();
-            SelectObject(hitObject);
-            SelectTile(hitTile);
+            HoverTile(hitTile); //Set current tile as hovered tile.
+            
         }
         else
         {
+            //myHoveredIndicator.disableSelection();
             ClearSelection();
         }
+
         if (Input.GetMouseButtonDown(0))
         {
-            if(hoveredObject!=null)
+            if(hoveredTile!=null)
             {
-                selectedObject = hoveredObject;
-                mySelectedIndicator.activateSelection();
+                UnitCheck = hoveredTile.GetComponentInChildren<Unit>();
+                if (UnitCheck != null)
+                {
+                    temp = UnitCheck.GetComponentInChildren<PlayerOwned>();
+                    checkPlayer = temp.owner;
+
+                }
+
+
+                if (UnitCheck==null || (checkPlayer == currentPlayer))
+                {
+                    selectedTile = hoveredTile;
+                    SelectObject(selectedTile);
+                    mySelectedIndicator.activateSelection();
+
+                }
             }
 
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            selectedTile = null;
             mySelectedIndicator.disableSelection();
         }
     }
 
-    void SelectObject(Unit obj)
+    public void updatePlayer()
     {
-        if (hoveredObject != null)
+        currentPlayer = myManager.getPlayer();
+    }
+
+    void SelectObject(Tile obj)
+    {
+        if (hoveredTile != null)
         {
-            if (obj == hoveredObject)
+            if (obj == hoveredTile)
             {
                 myHoveredIndicator.activateSelection();
                 return;
@@ -62,14 +89,15 @@ public class MouseManager : MonoBehaviour {
 
             ClearSelection();
         }
-        hoveredObject = obj;
+        selectedTile = obj;
         
     }
 
-    void SelectTile(Tile obj)
+    void HoverTile(Tile obj)
     {
-        if (hoveredObject != null)
+        if (hoveredTile != null)
         {
+            myHoveredIndicator.activateSelection();
             if (obj == selectedTile)
             {               
                 return;
@@ -77,14 +105,16 @@ public class MouseManager : MonoBehaviour {
 
             ClearSelection();
         }
-        selectedTile = obj;
+
+        hoveredTile = obj;
 
     }
 
     void ClearSelection()
     {
-        if (hoveredObject == null)
-        {            
+        if (hoveredTile == null)
+        {
+            myHoveredIndicator.disableSelection();
             return;
         }
 
@@ -92,9 +122,7 @@ public class MouseManager : MonoBehaviour {
         {
             return;
         }
-
-        myHoveredIndicator.disableSelection();
-        selectedTile = null;
-        hoveredObject = null;
+        
+        hoveredTile = null;
     }
 }

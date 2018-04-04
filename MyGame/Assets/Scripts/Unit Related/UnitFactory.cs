@@ -33,7 +33,7 @@ public class UnitFactory : MonoBehaviour
             }
 
             Unit newUnit = Instantiate(Prototype);
-            //cell = Map.GetCell(SpawnCoordinate.x, SpawnCoordinate.y);
+            
 
             PlayerOwned ownertag = newUnit.GetComponent<PlayerOwned>();
             if (ownertag == null)
